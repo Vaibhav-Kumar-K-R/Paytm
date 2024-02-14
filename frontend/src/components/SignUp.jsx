@@ -15,6 +15,7 @@ import {Link} from "react-router-dom"
   const [invalidemail,setInvalidemail]=useState(false)
   const [minpassword,setminpassword]=useState(false)
   const [emailtaken,setemailtaken]=useState(false)
+  const [loading,setloading]=useState(false)
   return (
     <>
       <div className='w-full h-screen bg-white flex flex-col text-wrap justify-center items-center '>
@@ -97,6 +98,7 @@ import {Link} from "react-router-dom"
   lastName:ln.current.value,
   password:ps.current.value
  }
+ setloading(true)
  try {
     const res= await axios.post('http://localhost:3000/api/v1/user/signup',JSON.stringify(ob),{
   headers:{
@@ -134,7 +136,11 @@ import {Link} from "react-router-dom"
  }
  
       
-}}>Sign Up</button>
+}}>{loading?<div className='flex items-center justify-center '>
+          <div className='border-t-4  border-t-black border-l-4 border-r-4 border-b-4 rounded-3xl border-white full w-7 h-7 animate-spin bg-opacity-75'>
+               
+          </div>
+        </div>:"Sign Up"}</button>
 
              <p className='text-center font-semibold '>Already have an account?<Link to={'/signin'} className=' cursor-pointer underline'>Sign In</Link></p>
 

@@ -11,6 +11,7 @@ function SignIn() {
   const [password,setPassword]=useState(false)
   const [minpassword,setminpassword]=useState(false)
   const [emailorpass,setemailorpass]=useState(false)
+   const [loading,setloading]=useState(false)
   const nav=useNavigate()
   useEffect(()=>{
 
@@ -67,6 +68,7 @@ function SignIn() {
               }, 3000);
               return ;
             }
+            setloading(true)
  const res= await axios.post('http://localhost:3000/api/v1/user/signin',JSON.stringify(ob),{
   headers:{
     'Content-Type':'application/json'
@@ -103,7 +105,11 @@ function SignIn() {
  }
  })
 
-}}>Sign In</button>
+}}>{loading?<div className='flex items-center justify-center '>
+          <div className='border-t-4  border-t-black border-l-4 border-r-4 border-b-4 rounded-3xl border-white full w-7 h-7 animate-spin bg-opacity-75'>
+               
+          </div>
+        </div>:"Sign In"}</button>
 
             <p className='text-center font-semibold '>Don't have an account?<Link to={'/signup'} className=' cursor-pointer inline underline'>Sign Up</Link></p>
 
