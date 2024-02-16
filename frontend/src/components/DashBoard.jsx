@@ -71,16 +71,16 @@ const [balance,setbalance]=useState(0)
   
   return ( 
     <>
-      <div className='flex justify-between px-5 py-3 border border-slate-100'>
+      <div className='flex flex-wrap justify-between px-5 py-3 border border-slate-100'>
         <h1 className='font-md text-3xl cursor-pointer'>
             Payments App
         </h1>
-        <div>
-          <button className='relative right-7 inline border-2 border-solid-black px-3 py-1 rounded-md bg-black text-white' onClick={(e)=>{
+        <div className='flex justify-between  mx-2 flex-wrap-reverse'>
+         
+        <p className='font-normal inline'>Hello, {username} <button className='border-2 border-solid-black px-3 py-1 rounded-full'>{username.charAt(0).toUpperCase()}</button></p> <br />  <button className='relative right-7 inline border-2 border-solid-black px-5 py-1 rounded-md bg-black text-white relative right-0' onClick={(e)=>{
            localStorage.removeItem('token');
            nav('/signin')
           }}>Logout</button>
-        <p className='font-normal inline'>Hello, {username} <button className='border-2 border-solid-black px-3 py-1 rounded-full'>{username.charAt(0).toUpperCase()}</button></p> 
         </div>
       </div>
       <div className='w-full font-semibold p-4  '>

@@ -96,7 +96,7 @@ function SignIn() {
   return
  }
  if(e.response.data.msg=="Some error ocurred"){
- 
+  setloading(false)
   setemailorpass(true)
   setTimeout(() => {
      setemailorpass(!true)

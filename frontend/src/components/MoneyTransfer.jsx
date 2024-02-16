@@ -1,6 +1,6 @@
 import React, { useEffect,useRef, useState } from 'react'
 import axios from 'axios'
-import {useSearchParams,useNavigate} from "react-router-dom"
+import {useSearchParams,useNavigate,Link} from "react-router-dom"
 function MoneyTransfer() {
   const [lowbalance,setlowbalance]=useState(false)
   const [nobalance,setnobalance]=useState(false)
@@ -9,11 +9,13 @@ function MoneyTransfer() {
   const [searchParams]=useSearchParams()
   const id=searchParams.get("id")
   const name=searchParams.get("name")
+ 
 const nav=useNavigate()
 
   return (
     <div className='flex justify-center w-full h-screen flex-col items-center bg-slate-100'>
       <div className='w-fit  h-fit bg-white border rounded-md shadow-2xl flex flex-col items-center p-8 my-8'>
+        <Link to={'/dashboard'} className='text-right relative left-20 top-1 hover:underline'>Back To Home page</Link>
         <h1 className='text-3xl font-md text-center font-bold p-4'>  Send Money</h1>
           <p className='inline p-5 py-1  pb-0 font-sm text-2xl font-bold my-0 mr-auto '>  <button className='px-3 py-1 text-white font-sm bg-green-500 rounded-full border'>{name.charAt(0)}</button> {name} </p> <br />
            
