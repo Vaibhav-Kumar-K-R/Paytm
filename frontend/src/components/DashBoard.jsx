@@ -11,9 +11,13 @@ const [balance,setbalance]=useState(0)
   useEffect(()=>{
     // async function fetchData1(){
     //   try {
-    //     const response=await axios.get('http://localhost:3000/api/v1/user/all')
-    //     //console.log(response.data);
-    //    setArr(response.data.users)
+    //     const response=await axios.get('http://localhost:3000/api/v1/user/alltransactions',{
+    //    headers:{
+    //      Authorization:`Bearer ${localStorage.getItem('token')}`
+    //    }
+    //    })
+    //     console.log(response.data.msg.alltransactions);
+     
     //   } catch (error) {
     //     console.error("Error fetching data\n ",error)
     //   }
@@ -76,11 +80,15 @@ const [balance,setbalance]=useState(0)
             Payments App
         </h1>
         <div className='flex justify-between  mx-2 flex-wrap-reverse'>
-         
-        <p className='font-normal inline'>Hello, {username} <button className='border-2 border-solid-black px-3 py-1 rounded-full'>{username.charAt(0).toUpperCase()}</button></p> <br />  <button className='relative right-7 inline border-2 border-solid-black px-5 py-1 rounded-md bg-black text-white relative right-0' onClick={(e)=>{
+          <button className='relative right-7 inline border-2 border-solid-black px-5 py-1 rounded-md bg-black text-white relative right-0' onClick={()=>{
+          
+           nav('/alltransactions')
+          }}>See all transactions</button>
+           <button className='relative right-7 inline border-2 border-solid-black px-5 py-1 rounded-md bg-black text-white relative right-0' onClick={(e)=>{
            localStorage.removeItem('token');
            nav('/signin')
           }}>Logout</button>
+        <p className='font-normal inline'>Hello, {username} <button className='border-2 border-solid-black px-3 py-1 rounded-full'>{username.charAt(0).toUpperCase()}</button></p> <br /> 
         </div>
       </div>
       <div className='w-full font-semibold p-4  '>

@@ -4,6 +4,7 @@ import SignIn from "./components/SignIn"
 import DashBoard from "./components/DashBoard"
 import MoneyTransfer from "./components/MoneyTransfer"
 import Paymentssuccess from "./components/Paymentssuccess"
+import AllTransactions from "./components/AllTransactions"
 import Home from "./components/Home"
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
       <Route path="/signin" element={<SignIn />}></Route>
        <Route path="/moneytransfer" element={<MoneyTransfer />}/>
        <Route path="/paymentsuccess" element={<Paymentssuccess/>}></Route>
+       <Route path="/alltransactions" element={<AllTransactions/>} ></Route>
        
     </Routes>
    </BrowserRouter>

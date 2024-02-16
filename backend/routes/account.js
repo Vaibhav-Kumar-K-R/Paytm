@@ -1,7 +1,7 @@
 const express=require("express")
 const mongoose=require("mongoose")
 const { authMiddleware } = require( "../middleware" )
-const {User,Account}=require("../db")
+const {User,Account,Transactions}=require("../db")
 const router=express.Router()
 
 router.get('/balance',authMiddleware,async(req,res)=>{
@@ -21,15 +21,60 @@ router.post('/transfer',authMiddleware,async(req,res)=>{
     const fromuser=await Account.findOne({
         userId:from
     }) 
+
+
+     const fromusername=await User.findOne({
+        _id:from
+    }) 
+   // console.log(fromusername);
+    
+    
     if(fromuser.balance<amount){
         res.status(400).json({
             msg:"Insufficient balance"
         })
         return ;
     }
+    
     const toUser=await Account.findOne({
         userId:to
     })
+    
+    
+    
+    const toUsername=await User.findOne({ 
+        _id:to
+    })
+   // console.log(toUsername);
+    
+    const senderobj={
+        userId:from,
+        from:fromusername.firstName+" "+fromusername.lastName,
+        to:toUsername.firstName+" "+toUsername.lastName,
+        amount:amount
+    }
+    const receiverobj={
+         userId:to,
+        from:fromusername.firstName+" "+fromusername.lastName,
+        to:toUsername.firstName+" "+toUsername.lastName,
+        amount:amount
+    }
+    await Transactions.findOneAndUpdate({
+        userId:from
+    },{
+        $push:{alltransactions:senderobj}
+    },{
+        upsert:true
+    })
+    await Transactions.findOneAndUpdate({
+        userId:to
+    },{
+        $push:{alltransactions:receiverobj}
+    },{
+        upsert:true
+    })
+
+
     if(!toUser){
          res.status(400).json({
             msg:"Account does not exist"

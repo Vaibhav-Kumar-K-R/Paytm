@@ -1,7 +1,7 @@
 const express=require("express")
 const router=express.Router();
 const zod=require("zod")
-const {User,Account}=require("../db")
+const {User,Account,Transactions}=require("../db")
 const jwt=require("jsonwebtoken")
 const secret=require("../config");
 const { authMiddleware } = require( "../middleware" );
@@ -61,7 +61,7 @@ router.post('/signup',async(req,res)=>{
    const userId=user._id;
    const account=await Account.create({
         userId:user._id,
-        balance:(Math.random()*10000)+1
+        balance:(Math.random()*100000)+1
    })
    const token=jwt.sign({userId},secret.JWT_SECRET)
    return res.status(200).json({
@@ -169,7 +169,24 @@ router.get('/all',async(req,res)=>{
         users:userArr
     })
 })
-
+router.get('/alltransactions',authMiddleware,async(req,res)=>{
+     const userss=await Transactions.findOne(
+        {userId:req.userId}
+    ).catch((e)=>{
+        console.log(e);
+    })
+    if(userss==null){
+        let alltransactions=[]
+        res.json({
+           msg:alltransactions
+        })
+        return ;
+    }
+   
+       res.json({
+       msg:userss.alltransactions
+       })
+})
 router.get('/usermy',authMiddleware,async(req,res)=>{
     const userss=await User.findById(
         req.userId

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {useNavigate} from"react-router-dom"
 import axios from "axios"
 import {Link} from "react-router-dom"
@@ -30,7 +30,7 @@ import {Link} from "react-router-dom"
            <div className='p-0 mb-1'>
 
             <input type="text" ref={fn} className='border text-slate-950 border-slate w-full py-1 px-1 rounded-md my-0' id='Fname' placeholder='John'  /><br />
-            {firstName && <p className='text-xs text-red-500'>Firstname is required</p> }
+            {firstName && <p className='text-sm text-red-500'>Firstname is required</p> }
             
            </div>
 
@@ -41,27 +41,29 @@ import {Link} from "react-router-dom"
             <div className='p-0 mb-1'>
 
             <input type="text" className='border text-slate-950 border-slate w-full py-1 px-1 rounded-md my-2' id='Lname' placeholder='Doe' ref={ln} /><br />
-            {lastName && <p className='text-xs text-red-500'>Lastname is required</p> }
+            {lastName && <p className='text-sm text-red-500'>Lastname is required</p> }
             </div>
 
             <label htmlFor="email" className='font-medium'>Email</label>
             <div className='p-0 mb-1'>
 
             <input type="text" ref={em} className='my-2 border text-slate-950 border-slate w-full py-1 px-1 rounded-md' id='email' placeholder='johndoe@example.com' /><br />
-            {email  && <p className='text-xs text-red-500'>Email is required</p> }
-            {invalidemail && <p className='text-xs text-red-500'>Invalid email!!</p> }
-            {emailtaken && <p className='text-xs text-red-500'>Email already taken!!</p>}
+            {email  && <p className='text-sm text-red-500'>Email is required</p> }
+            {invalidemail && <p className='text-sm text-red-500'>Invalid email!!</p> }
+            {emailtaken && <p className='text-sm text-red-500'>Email already taken!!</p>}
             </div>
 
             <label htmlFor="password" className='font-medium'>Password</label><br />
             <div className='p-0 mb-1'>
             <input type="password"ref={ps} className='border text-slate-950 border-slate w-full py-1 px-1 rounded-md my-1' id='password'  /><br /> 
-            {password && <p className='text-xs text-red-500'>Password is required</p> }
-            {minpassword && <p className='text-xs text-red-500'>Password must contain at least 6 character(s)</p> }
+            {password && <p className='text-sm text-red-500'>Password is required</p> }
+            {minpassword && <p className='text-sm text-red-500'>Password must contain at least 6 character(s)</p> }
 
             </div>
 
-          <button className=' my-2 py-1 w-full text-center text-white bg-black border rounded-md' onClick={async()=>{
+          <button className=' my-2 py-1 w-full text-center text-white bg-black border rounded-md' 
+          
+          onClick={async()=>{
             if(fn.current.value==''){
                setfirstName(true);
               setTimeout(() => {
@@ -112,7 +114,7 @@ import {Link} from "react-router-dom"
   navigate("/dashboard")
  }
  ).catch((e)=>{
- 
+ setloading(false)
  if(e.response.data.msg=="Invalid email"){
   setInvalidemail(true)
   setTimeout(() => {
@@ -128,7 +130,10 @@ import {Link} from "react-router-dom"
   return
  }
  if(e.response.data.msg=="Email already taken"){
-
+    setemailtaken(true)
+    setTimeout(()=>{
+      setemailtaken(!true)
+    },3000)
  }
  })
  } catch (error) {

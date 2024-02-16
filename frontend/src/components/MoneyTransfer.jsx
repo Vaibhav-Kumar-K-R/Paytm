@@ -23,14 +23,15 @@ const nav=useNavigate()
            {nobalance&& <p className='text-md font-bold py-1 text-red-500 text-wrap'>Your balance is too low to make payments!!</p> }
             <input type="number" ref={amt} id="amount" placeholder='Enter amount(in Rs.)' className='mx-5 p-2 bg-white w-72 border rounded-sm  ' />
             <button className=' my-3 bg-green-500 w-72 text-white  px-5 py-2 border rounded-md justify-center' onClick={async(e)=>{
+              setloading(true)
              if(amt.current.value<=0){
                 setlowbalance(true)
                 setTimeout(()=>{
-                  setlowbalance(!true)
                 },3000)
+                setloading(false)
                 return;
-             }
-             setloading(true)
+              }
+              setlowbalance(!true)
                const res= await axios.post('http://localhost:3000/api/v1/account/transfer',JSON.stringify({
                 to:id,
                 amount:amt.current.value
@@ -45,7 +46,7 @@ const nav=useNavigate()
   nav(`/paymentsuccess?name=${name}&amount=${amt.current.value}`)
  }
  ).catch((e)=>{
-  
+  setloading(false)
  
   if(e.response.data.msg=="Insufficient balance"){
     setnobalance(true);

@@ -43,9 +43,9 @@ function SignIn() {
           <div className='p-0 mb-1 '>
 
             <input type="password" ref={ps} className='border text-slate-950 border-slate w-full py-1 px-1 rounded-md my-2' id='password'  /><br />
-            {password && <p className='text-xs text-red-500'>Password is required</p> }
-            {minpassword && <p className='text-xs text-red-500'>Password must contain at least 6 character(s)</p> }
-            {emailorpass && <p className=' text-xs text-red-500'>Email doesn't exist or password is wrong</p> }
+            {password && <p className='text-sm text-red-500'>Password is required</p> }
+            {minpassword && <p className='text-sm text-red-500'>Password must contain at least 6 character(s)</p> }
+            {emailorpass && <p className=' text-sm text-red-500'>Email doesn't exist or password is wrong</p> }
             
           </div>
 
@@ -80,6 +80,7 @@ function SignIn() {
   nav("/dashboard")
  }
  ).catch((e)=>{
+   setloading(false)
  
    if(e.response.data.msg=="Invalid email"){
   setInvalidemail(true)
@@ -96,7 +97,6 @@ function SignIn() {
   return
  }
  if(e.response.data.msg=="Some error ocurred"){
-  setloading(false)
   setemailorpass(true)
   setTimeout(() => {
      setemailorpass(!true)
