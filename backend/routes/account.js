@@ -17,6 +17,8 @@ router.post('/transfer',authMiddleware,async(req,res)=>{
     const to=req.body.to;
     const amount=req.body.amount;
     const from=req.userId;
+    const dateandtime1=req.body.dateandtime;
+    
 
     const fromuser=await Account.findOne({
         userId:from
@@ -49,15 +51,17 @@ router.post('/transfer',authMiddleware,async(req,res)=>{
     
     const senderobj={
         userId:from,
-        from:fromusername.firstName+" "+fromusername.lastName,
+        from:"Me",
         to:toUsername.firstName+" "+toUsername.lastName,
-        amount:amount
+        amount:amount,
+        dateandtime:dateandtime1
     }
     const receiverobj={
          userId:to,
         from:fromusername.firstName+" "+fromusername.lastName,
-        to:toUsername.firstName+" "+toUsername.lastName,
-        amount:amount
+        to:"Me",
+        amount:amount,
+        dateandtime:dateandtime1
     }
     await Transactions.findOneAndUpdate({
         userId:from

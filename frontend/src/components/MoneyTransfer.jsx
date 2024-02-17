@@ -32,17 +32,26 @@ const nav=useNavigate()
                 return;
               }
               setlowbalance(!true)
+              const formattedDate = new Intl.DateTimeFormat('en-US',{
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                  hour: 'numeric',
+                  minute: 'numeric',
+                  hour12: true
+                }).format(new Date());
+               
                const res= await axios.post('http://localhost:3000/api/v1/account/transfer',JSON.stringify({
                 to:id,
-                amount:amt.current.value
+                amount:amt.current.value,
+                dateandtime:formattedDate.toString()
                }),{
   headers:{
     "Content-Type":'application/json' ,
     Authorization:`Bearer ${localStorage.getItem('token')}`
   }
  }).then((e)=>{
-//  alert(`Your Payment to ${name} was successfull...Redirecting you back to the dashboard page`)
- // nav('/dashboard')
+
   nav(`/paymentsuccess?name=${name}&amount=${amt.current.value}`)
  }
  ).catch((e)=>{

@@ -25,6 +25,7 @@ const trsnSchema=new mongoose.Schema({
     from:String,
     to:String,
     amount:Number,
+    dateandtime:String
    
 }) 
 const transactionsSchema=new mongoose.Schema({

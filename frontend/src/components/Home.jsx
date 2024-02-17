@@ -4,7 +4,7 @@ const MainPage = () => {
   return (
     <div className="bg-gray-100 min-h-screen">
       <header className="bg-blue-500 text-white py-4">
-        <h1 className="text-2xl font-semibold">Payments Website</h1>
+        <h1 className="text-2xl font-semibold text-center">Payments Website</h1>
       </header>
 
       <div className="max-w-2xl mx-auto p-6 mt-8 bg-white shadow-md rounded-md">
@@ -14,7 +14,7 @@ const MainPage = () => {
         </div>
 
         {/* Your main content here */}
-        Welcome to Payments App
+       <p className='text-center text-xl font-md'> Welcome to Payments App</p>
       </div>
     </div>
   );
