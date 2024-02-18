@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
 import {Link} from "react-router-dom"
+import Loading from './Loading'
 function AllTransactions() {
     const [data,setdata]=useState([])
+    const [loading,setloading]=useState(true)
     useEffect(()=>{
          if(!localStorage||!localStorage.getItem('token')){
           nav('/signin')
@@ -22,10 +24,12 @@ function AllTransactions() {
         console.error("Error fetching data\n ",error)
       }
     }
-    fetchData1()
+    fetchData1().then(()=>{
+      setloading(!true)
+    })
     },[])
   return (
-    <div>
+    loading?<Loading/>:<div>
      {(data.length==0)? 
      <div>
       <Link to={'/dashboard'} className='ml-10 mt-20 p-2 relative top-10 bg-black text-white border-0 rounded-md px-4'>Go Back</Link>

@@ -1,6 +1,14 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { Link } from 'react-router-dom';
+import {useNavigate} from "react-router-dom"
 const MainPage = () => {
+  const nav=useNavigate()
+  useEffect(()=>{
+
+    if(localStorage.getItem('token')){
+      nav('/dashboard')
+    }
+  },[])
   return (
     <div className="bg-gray-100 min-h-screen">
       <header className="bg-blue-500 text-white py-4">

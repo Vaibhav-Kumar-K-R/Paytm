@@ -1,28 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
 import UserList from './UserList'
+import Loading from './Loading'
 import {useNavigate} from "react-router-dom"
 
 function DashBoard() {
   const [username,setUsername]=useState("User")
+  const [loading,setloading]=useState(true)
 const [balance,setbalance]=useState(0)
   const [arr,setArr]=useState([])
   const nav=useNavigate()
   useEffect(()=>{
-    // async function fetchData1(){
-    //   try {
-    //     const response=await axios.get('https://paytm-backend-clone.onrender.com/api/v1/user/alltransactions',{
-    //    headers:{
-    //      Authorization:`Bearer ${localStorage.getItem('token')}`
-    //    }
-    //    })
-    //     console.log(response.data.msg.alltransactions);
-     
-    //   } catch (error) {
-    //     console.error("Error fetching data\n ",error)
-    //   }
-    // }
-    // fetchData1()
+
     async function getuserprofile(){
     
       let respons;
@@ -61,12 +50,15 @@ const [balance,setbalance]=useState(0)
             response.data.users.splice(i,1);
           }
         }
+        console.log(respons.data.users+"  ");
        setArr(response.data.users)
       } catch (error) {
         console.error("Error fetching data\n ",error)
       }
     }
-    getuserprofile()
+    getuserprofile().then(()=>{
+      setloading(false)
+    })
    
   },[])
   
@@ -74,17 +66,17 @@ const [balance,setbalance]=useState(0)
  
   
   return ( 
-    <>
+    loading?<Loading></Loading>:<>
       <div className='flex flex-wrap justify-between px-5 py-3 border border-slate-100'>
         <h1 className='font-md text-3xl cursor-pointer'>
             Payments App
         </h1>
         <div className='flex justify-between  mx-2 flex-wrap-reverse'>
-          <button className='relative right-7 inline border-2 border-solid-black px-5 py-1 rounded-md bg-black text-white relative right-0' onClick={()=>{
+          <button className='relative right-7 inline border-2 border-solid-black px-5 py-1 rounded-md bg-black text-white ' onClick={()=>{
           
            nav('/alltransactions')
           }}>See all transactions</button>
-           <button className='relative right-7 inline border-2 border-solid-black px-5 py-1 rounded-md bg-black text-white relative right-0' onClick={(e)=>{
+           <button className='relative right-7 inline border-2 border-solid-black px-5 py-1 rounded-md bg-black text-white ' onClick={(e)=>{
            localStorage.removeItem('token');
            nav('/signin')
           }}>Logout</button>

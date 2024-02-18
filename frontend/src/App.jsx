@@ -6,6 +6,7 @@ import MoneyTransfer from "./components/MoneyTransfer"
 import Paymentssuccess from "./components/Paymentssuccess"
 import AllTransactions from "./components/AllTransactions"
 import Home from "./components/Home"
+import Loading from "./components/Loading"
 function App() {
 
   return (
@@ -22,6 +23,7 @@ function App() {
        
     </Routes>
    </BrowserRouter>
+   
   
   
     </>
