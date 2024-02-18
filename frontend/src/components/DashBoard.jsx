@@ -11,7 +11,7 @@ const [balance,setbalance]=useState(0)
   useEffect(()=>{
     // async function fetchData1(){
     //   try {
-    //     const response=await axios.get('http://localhost:3000/api/v1/user/alltransactions',{
+    //     const response=await axios.get('https://paytm-backend-clone.onrender.com/api/v1/user/alltransactions',{
     //    headers:{
     //      Authorization:`Bearer ${localStorage.getItem('token')}`
     //    }
@@ -33,12 +33,12 @@ const [balance,setbalance]=useState(0)
           nav('/signin')
         }
        
-       respons=await axios.get('http://localhost:3000/api/v1/user/usermy',{
+       respons=await axios.get('https://paytm-backend-clone.onrender.com/api/v1/user/usermy',{
         headers:{
           Authorization:`Bearer ${localStorage.getItem('token')}`
         }
         })
-        const b=await axios.get('http://localhost:3000/api/v1/account/balance',{
+        const b=await axios.get('https://paytm-backend-clone.onrender.com/api/v1/account/balance',{
         headers:{
           Authorization:`Bearer ${localStorage.getItem('token')}`
         }
@@ -53,7 +53,7 @@ const [balance,setbalance]=useState(0)
         console.error("Error fetching data\n ",error)
       }
        try {
-        const response=await axios.get('http://localhost:3000/api/v1/user/all')
+        const response=await axios.get('https://paytm-backend-clone.onrender.com/api/v1/user/all')
        // if(Array.includes())
        
         for(let i=0;i<response.data.users.length;i++){
@@ -117,7 +117,7 @@ const [balance,setbalance]=useState(0)
 async function fetchData(setArr){
   
       try {
-        const response=await axios.get('http://localhost:3000/api/v1/user/bulk',{
+        const response=await axios.get('https://paytm-backend-clone.onrender.com/api/v1/user/bulk',{
           params:{
             filters:document.getElementById('text').value
           }

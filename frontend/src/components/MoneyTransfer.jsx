@@ -41,7 +41,7 @@ const nav=useNavigate()
                   hour12: true
                 }).format(new Date());
                
-               const res= await axios.post('http://localhost:3000/api/v1/account/transfer',JSON.stringify({
+               const res= await axios.post('https://paytm-backend-clone.onrender.com/api/v1/account/transfer',JSON.stringify({
                 to:id,
                 amount:amt.current.value,
                 dateandtime:formattedDate.toString()

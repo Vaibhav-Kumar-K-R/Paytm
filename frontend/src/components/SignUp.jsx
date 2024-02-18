@@ -102,7 +102,7 @@ import {Link} from "react-router-dom"
  }
  setloading(true)
  try {
-    const res= await axios.post('http://localhost:3000/api/v1/user/signup',JSON.stringify(ob),{
+    const res= await axios.post('https://paytm-backend-clone.onrender.com/api/v1/user/signup',JSON.stringify(ob),{
   headers:{
     'Content-Type':'application/json',
    

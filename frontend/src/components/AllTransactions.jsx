@@ -10,7 +10,7 @@ function AllTransactions() {
        
          async function fetchData1(){
       try {
-        const response=await axios.get('http://localhost:3000/api/v1/user/alltransactions',{
+        const response=await axios.get('https://paytm-backend-clone.onrender.com/api/v1/user/alltransactions',{
        headers:{
          Authorization:`Bearer ${localStorage.getItem('token')}`
        }
