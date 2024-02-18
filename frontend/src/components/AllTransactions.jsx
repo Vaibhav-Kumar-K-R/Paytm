@@ -27,7 +27,10 @@ function AllTransactions() {
   return (
     <div>
      {(data.length==0)? 
-     <div className='text-4xl font-md text-center flex justify-center items-center h-screen w-full  '>No transactions yet!!</div>: (
+     <div>
+      <Link to={'/dashboard'} className='ml-10 mt-20 p-2 relative top-10 bg-black text-white border-0 rounded-md px-4'>Go Back</Link>
+       <div className='text-4xl font-md text-center flex justify-center items-center h-screen w-full  '>No transactions yet!!</div>
+     </div>:(
     <div className={`flex flex-wrap flex-col items-center  justify-between px-4 py-1  `}>
         <Link to={'/dashboard'}><button className='absolute mt-2 left-5 text-lg bg-black text-white px-5 pb-1 rounded border-0'>Go Back</button></Link> 
         <h1 className='block text-3xl text-center font-md mt-10 mb-3 underline'> Your Transactions</h1> <br />
